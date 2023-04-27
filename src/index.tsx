@@ -9,15 +9,3 @@ const root = ReactDOM.createRoot(
 root.render(
   <App />
 );
-
-// import World from './world'
-
-// const root: HTMLElement | null =
-//   document.getElementById(
-//     'root'
-//   )
-// const world =
-//   new World(
-//     'Hello World!!!!!!!'
-//   )
-// world.sayHello(root)

@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { FC, ReactNode } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from './Provider/AuthProvider';
 
-const PrivateRoute = () => {
+interface PrivateRouteProps {
+  children: ReactNode;
+}
+
+const PrivateRoute: FC<PrivateRouteProps> = ({ children }) => {
   const { currentUser } = useAuth();
 
-  return currentUser ? <Outlet /> : <Navigate to="/signin" />;
+  return currentUser ? <>{children}</> : <Navigate to="/signin" />;
 };
 
 export default PrivateRoute;

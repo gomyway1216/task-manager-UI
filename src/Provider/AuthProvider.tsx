@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useContext, useState, ReactNode } from 'react';
+import React, { FC, createContext, useEffect, useContext, useState, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { auth, signInWithEmail, signOutUser } from '../api/firebaseConnect';
 import { User } from 'firebase/auth';
@@ -28,7 +28,7 @@ export const useAuth = () => {
 };
 
 
-export const AuthProvider = ({ children }: AuthProviderProps) => {
+export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [userId, setUserId] = useState('');
   const [loading, setLoading] = useState(true);
@@ -40,6 +40,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signOut = () => {
     signOutUser();
+    setUserId('');
+    setCurrentUser(null);
   };
 
   useEffect(() => {

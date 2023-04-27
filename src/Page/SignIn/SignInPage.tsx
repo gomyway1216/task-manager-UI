@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Alert, AlertTitle, TextField, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Provider/AuthProvider';
@@ -9,7 +9,7 @@ const defaultInput = {
   password: ''
 };
 
-const SignInPage = () => {
+const SignInPage: FC = () => {
   const [itemInput, setItemInput] = useState(defaultInput);
   const [loading, setLoading] = useState<boolean>();
   const [errorText, setErrorText] = useState(defaultInput);

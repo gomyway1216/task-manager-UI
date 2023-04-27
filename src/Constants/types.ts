@@ -29,6 +29,11 @@ export interface Task {
   tags: Tag[];
 }
 
+export interface TaskMin {
+  id: number;
+  title: string;
+}
+
 export interface NewTask {
   userId: string,
   title: string,

@@ -1,7 +1,7 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FC } from 'react';
 import TaskForm from './TaskForm';
 
-const AddTaskPage: FunctionComponent = () => {
+const AddTaskPage: FC = () => {
   return (
     <div>
       <div>Add Task</div>

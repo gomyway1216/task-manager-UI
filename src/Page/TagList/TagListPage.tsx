@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Button, Chip, Stack, TextField } from '@mui/material';
 import { useAuth } from '../../Provider/AuthProvider';
 import { addTag, getAllTagsByUserId } from '../../api/tag';
 import { Tag } from '../../Constants/types';
 
-const TagListPage = () => {
+const TagListPage: FC = () => {
   const [tags, setTags] = React.useState<Tag[]>();
   const { userId } = useAuth();
   const [newTag, setNewTag] = useState('');
@@ -54,7 +54,6 @@ const TagListPage = () => {
           onClick={handleAddTag}
         >Add</Button>
       </div>
-
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { InputType } from '../../Constants/types';
 import InputField from './InputField';
-import { Tag, Task } from '../../Constants/types';
+import { Tag, Task, TaskMin } from '../../Constants/types';
 import { Button, SelectChangeEvent, Snackbar } from '@mui/material';
 import { addTask, getTasksMinByUserId } from '../../api/task';
 import { getAllTagsByUserId } from '../../api/tag';
@@ -28,7 +28,7 @@ const TaskForm: React.FC = () => {
   const { userId } = useAuth();
   const [task, setTask] = useState(initialTask);
   const [tagList, setTagList] = useState<Tag[]>([]);
-  const [taskList, setTaskList] = useState<Task[]>([]);
+  const [taskList, setTaskList] = useState<TaskMin[]>([]);
   const [titleEmpty, setTitleEmpty] = useState(false);
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -36,7 +36,7 @@ const TaskForm: React.FC = () => {
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    value?: string | number | Dayjs | string[] | Task | null | undefined
+    value?: string | number | Dayjs | string[] | TaskMin | null | undefined
   ) => {
     const { name } = event.target;
     const inputValue = value || event.target.value;
@@ -50,7 +50,7 @@ const TaskForm: React.FC = () => {
   };
 
   const handleSelectChange = (
-    event: SelectChangeEvent<number[] | Task>
+    event: SelectChangeEvent<number[] | TaskMin>
   ) => {
     if (event.target.name) {
       const { name, value } = event.target;

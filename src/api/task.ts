@@ -1,4 +1,4 @@
-import { PagedResponse, NewTask, Task } from "../Constants/types";
+import { PagedResponse, NewTask, Task, TaskMin } from "../Constants/types";
 
 export const fetchTasks = async (
   userId: string,
@@ -19,7 +19,7 @@ export const fetchTasks = async (
   return data;
 }
 
-export const getTasksMinByUserId = async (userId: string): Promise<Task[]> => {
+export const getTasksMinByUserId = async (userId: string): Promise<TaskMin[]> => {
   try {
     const response = await fetch(
       `http://localhost:8080/api/tasks/user/${userId}/all`
@@ -29,7 +29,7 @@ export const getTasksMinByUserId = async (userId: string): Promise<Task[]> => {
       throw new Error(`Error fetching tasks: ${response.statusText}`);
     }
 
-    const tasks: Task[] = await response.json();
+    const tasks: TaskMin[] = await response.json();
     return tasks;
   } catch (error: unknown) {
     if (error instanceof Error) {

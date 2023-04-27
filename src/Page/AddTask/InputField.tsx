@@ -1,5 +1,5 @@
-import React from 'react';
-import { Task, Tag, InputType } from '../../Constants/types';
+import React, { FC } from 'react';
+import { Task, TaskMin, Tag, InputType } from '../../Constants/types';
 import dayjs, { Dayjs } from 'dayjs';
 import {
   TextField,
@@ -15,32 +15,32 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 interface InputFieldProps {
   keyName: keyof InputType;
-  value: string | number | number[] | Task | Dayjs | null | undefined;
+  value: string | number | number[] | TaskMin | Dayjs | null | undefined;
   onInputChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    value?: string | number | Task | Dayjs | null | undefined
+    value?: string | number | TaskMin | Dayjs | null | undefined
   ) => void;
   onSelectChange: (
-    event: SelectChangeEvent<number[] | Task>
+    event: SelectChangeEvent<number[] | TaskMin>
   ) => void;
   onDateChange: (
     value: Dayjs | null,
     key: keyof Task
   ) => void;
   onDelete: (name: string, itemId: number) => void;
-  list?: Tag[] | Task[];
+  list?: Tag[] | TaskMin[];
   error?: boolean;
 }
 
-const InputField: React.FC<InputFieldProps> = ({ keyName, value, onInputChange, onSelectChange, onDateChange, onDelete, list, error }) => {
+const InputField: FC<InputFieldProps> = ({ keyName, value, onInputChange, onSelectChange, onDateChange, onDelete, list, error }) => {
   const fieldType = typeof value;
 
-  const isTag = (item: Tag | Task): item is Tag => {
+  const isTag = (item: Tag | TaskMin): item is Tag => {
     return 'name' in item;
   }
 
   const getTagNameById = (id: number) => {
-    const item = (list as (Tag | Task)[])?.find((item) => item.id === id);
+    const item = (list as (Tag | TaskMin)[])?.find((item) => item.id === id);
     if (item) {
       return 'name' in item ? item.name : item.title;
     }
@@ -114,7 +114,7 @@ const InputField: React.FC<InputFieldProps> = ({ keyName, value, onInputChange, 
         <Select
           labelId={`${keyName}-label`}
           id={keyName.toString()}
-          value={(value as Task)?.id || ''}
+          value={(value as TaskMin)?.id || ''}
           onChange={(event) => {
             if (event.target.value === 'none') {
               onSelectChange({
@@ -122,16 +122,16 @@ const InputField: React.FC<InputFieldProps> = ({ keyName, value, onInputChange, 
                   name: keyName.toString(),
                   value: null,
                 },
-              } as unknown as SelectChangeEvent<Task>);
+              } as unknown as SelectChangeEvent<TaskMin>);
             } else {
-              const selectedTask = (list as Task[])?.find((task) => task.id === event.target.value);
+              const selectedTask = (list as TaskMin[])?.find((task) => task.id === event.target.value);
               if (selectedTask) {
                 onSelectChange({
                   target: {
                     name: keyName.toString(),
                     value: selectedTask,
                   },
-                } as SelectChangeEvent<Task>);
+                } as SelectChangeEvent<TaskMin>);
               }
             }
           }}
